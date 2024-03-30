@@ -20,6 +20,11 @@ const postSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
+  unlike: {
+    type: Number,
+    require: true,
+    default: 0,
+  },
   comments: {
     type: String,
     required: true,
