@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const comments = require("./comments");
 
 const postSchema = new mongoose.Schema({
   title: {
@@ -11,25 +12,22 @@ const postSchema = new mongoose.Schema({
     required: true,
     default: Date.now(),
   },
-  description: {
+  body: {
     type: String,
     required: true,
-    maxlength: 200,
   },
-  like: {
-    type: Number,
-    required: true,
-  },
-  unlike: {
-    type: Number,
-    require: true,
-    default: 0,
-  },
-  comments: {
-    type: String,
-    required: true,
-    maxlength: 29,
-  },
+  like: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Like",
+    },
+  ],
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "comments",
+    },
+  ],
 });
 
-module.exports = mongoose.model("posts", postSchema);
+module.exports = mongoose.model("Post", postSchema);
